@@ -1,25 +1,32 @@
 <template>
-  <h1>ToDo</h1>
-  <form @submit.prevent="addTodo()">
-    <label>New ToDo: </label>
-    <input v-model="newTodo" name="newTodo" autpcomplete="off" />
-    <button>Add Todo</button>
-  </form>
-  <h2>ToDo List</h2>
-  <ul>
-    <li v-for="(todo, index) in todos" :key="index">
-      <span :class="{ done: todo.done }" @click="doneTodo(todo)">{{
-        todo.content
-      }}</span>
-      <button @click="removeTodo(index)">Remove</button>
-    </li>
-  </ul>
-  <h4 v-if="todos.length === 0">Empty list.</h4>
+  <div>
+    <h1>ToDo</h1>
+    <form @submit.prevent="addTodo()">
+      <label>New ToDo: </label>
+      <input v-model="newTodo" name="newTodo" autpcomplete="off" />
+      <button>Add Todo</button>
+    </form>
+    <h2>ToDo List</h2>
+    <ul>
+      <li v-for="(todo, index) in todos" :key="index">
+        <span :class="{ done: todo.done }" @click="doneTodo(todo)">{{
+          todo.content
+        }}</span>
+        <button @click="removeTodo(index)">Remove</button>
+      </li>
+    </ul>
+    <h4 v-if="todos.length === 0">Empty list.</h4>
+    <ModelButton />
+  </div>
 </template>
 
 <script>
 import { ref } from "vue";
+import ModelButton from "./modal-button.vue";
 export default {
+  components: {
+    ModelButton,
+  },
   setup() {
     const newTodo = ref("");
     const defaultData = [
