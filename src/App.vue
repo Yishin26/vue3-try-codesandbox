@@ -16,18 +16,28 @@
       </li>
     </ul>
     <h4 v-if="todos.length === 0">Empty list.</h4>
+
     <ModelButton />
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
+import myMixin from "./mixins/mixin";
+import useShowCompanyName from "./composables/useShowCompanyName";
 import ModelButton from "./modal-button.vue";
 export default {
+  mixins: [myMixin],
   components: {
     ModelButton,
   },
+  provide() {
+    return {
+      todos: this.todos,
+    };
+  },
   setup() {
+    const { companyName, consoleCompanyName } = useShowCompanyName();
     const newTodo = ref("");
     const defaultData = [
       {
@@ -37,6 +47,11 @@ export default {
     ];
     const todosData = JSON.parse(localStorage.getItem("todos")) || defaultData;
     const todos = ref(todosData);
+
+    const names = reactive({
+      first: "Bruce",
+      last: "Wayne",
+    });
 
     function addTodo() {
       if (newTodo.value) {
@@ -61,6 +76,8 @@ export default {
     function removeTodo(index) {
       todos.value.splice(index, 1);
       saveData();
+      console.log(this.$data.companyName);
+      consoleCompanyName();
     }
 
     return {
@@ -69,6 +86,7 @@ export default {
       addTodo,
       doneTodo,
       removeTodo,
+      names,
     };
   },
 };

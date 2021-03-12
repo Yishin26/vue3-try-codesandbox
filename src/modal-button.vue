@@ -8,6 +8,7 @@
       <div v-if="modalOpen" class="modal">
         <div>
           I'm a teleported modal!
+          <p>利用provide/inject 傳入子組件 {{ todos[0].content }}</p>
           <button @click="modalOpen = false">Close</button>
         </div>
       </div>
@@ -18,6 +19,7 @@
 <script>
 export default {
   name: "ModelButton",
+  inject: ["todos"],
   data() {
     return {
       modalOpen: false,
