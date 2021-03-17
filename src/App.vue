@@ -18,6 +18,7 @@
     <h4 v-if="todos.length === 0">Empty list.</h4>
 
     <ModelButton />
+    <TemplateRefs />
   </div>
 </template>
 
@@ -26,10 +27,13 @@ import { ref, reactive } from "vue";
 import myMixin from "./mixins/mixin";
 import useShowCompanyName from "./composables/useShowCompanyName";
 import ModelButton from "./modal-button.vue";
+import TemplateRefs from "./templateRefs.vue";
+
 export default {
   mixins: [myMixin],
   components: {
     ModelButton,
+    TemplateRefs,
   },
   provide() {
     return {
