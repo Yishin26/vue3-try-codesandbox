@@ -17,7 +17,9 @@
     </ul>
     <h4 v-if="todos.length === 0">Empty list.</h4>
 
-    <ModelButton />
+    <ModelButton>
+      <template v-slot:links> slot-text </template>
+    </ModelButton>
     <TemplateRefs />
   </div>
 </template>

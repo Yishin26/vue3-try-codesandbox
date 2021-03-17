@@ -3,7 +3,8 @@
     <button @click="modalOpen = true">
       Open full screen modal! (With teleport!)
     </button>
-
+    <!--Slot-->
+    <div class="slot-area"><slot name="links"></slot></div>
     <teleport to="div">
       <div v-if="modalOpen" class="modal">
         <div>
